@@ -46,6 +46,8 @@ public class PlayListControlsListener implements ActionListener {
 			HandlerProxy.getPlayListHandler().sortPlaylistByAlbum();
 		else if (e.getSource().equals(panel.getSortByGenre()))
 			HandlerProxy.getPlayListHandler().sortPlaylistByGenre();
+		else if (e.getSource().equals(panel.getSortByDuration()))
+			HandlerProxy.getPlayListHandler().sortPlaylistByDuration();
 		else if (e.getSource().equals(panel.getSavePlaylistButton()))
 			HandlerProxy.getPlayListHandler().savePlaylist();
 		else if (e.getSource().equals(panel.getLoadPlaylistButton()))
@@ -95,6 +97,13 @@ public class PlayListControlsListener implements ActionListener {
 			PlayListTableModel model = HandlerProxy.getVisualHandler().getPlayListTableModel();
 			model.setGenreVisible(panel.getShowGenre().isSelected());
 			Kernel.getInstance().state.setShowGenreInPlayList(panel.getShowGenre().isSelected());
+			HandlerProxy.getControllerHandler().getPlayListController().adjustColumnsWidth();
+			HandlerProxy.getControllerHandler().getPlayListFilterController().reapplyFilter();
+		}
+		else if (e.getSource().equals(panel.getShowDuration())) {
+			PlayListTableModel model = HandlerProxy.getVisualHandler().getPlayListTableModel();
+			model.setDurationVisible(panel.getShowDuration().isSelected());
+			Kernel.getInstance().state.setShowDurationInPlayList(panel.getShowDuration().isSelected());
 			HandlerProxy.getControllerHandler().getPlayListController().adjustColumnsWidth();
 			HandlerProxy.getControllerHandler().getPlayListFilterController().reapplyFilter();
 		}
